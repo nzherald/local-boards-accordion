@@ -1,0 +1,48 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/core-collapse/core-collapse.html">
+<link rel="import" href="../../../bower_components/core-icon/core-icon.html">
+<link rel="import" href="../../../bower_components/paper-button/paper-button.html">
+<link rel="import" href="../../../bower_components/paper-ripple/paper-ripple.html">
+
+<polymer-element name="local-board-response" attributes="board">
+  <template>
+    <style>
+      :host {
+        display: block;
+      }
+      paper-ripple {
+          color: #4285f4;
+        }
+    </style>
+    <paper-item on-click="{{toggle}}">
+        <img src="{{board.image}}">
+        {{board.board}} - {{board.representative}}
+        <core-icon icon="arrow-drop-down"></core-icon>
+    </paper-item>
+    <core-collapse id="collapse">
+      <div id='content'></div>
+    </core-collapse>
+  </template>
+  <script>
+    (function () {
+      Polymer({
+        ready: function(){
+          if(this.board.html) {
+            this.$.content.innerHTML = this.board.html;
+          } else {
+            this.$.content.innerHTML = '<p><i>Views not supplied</i></p>';
+          }
+        },
+        toggle: function() {
+          this.$.collapse.toggle();
+        },
+        downAction: function(e) {
+          this.$.ripple.downAction({x: e.x, y: e.y});
+        },
+        upAction: function(e) {
+            this.$.ripple.upAction();
+          }
+        });
+    })();
+  </script>
+</polymer-element>

@@ -1,0 +1,28 @@
+<link rel="import" href="../../../bower_components/polymer/polymer.html">
+<link rel="import" href="../../../bower_components/core-ajax/core-ajax.html">
+<polymer-element name="local-boards-service" attributes="boards">
+  <template>
+    <style>
+    :host {
+      display: none;
+    }
+    </style>
+    <core-ajax id="ajax"
+      auto
+      url="http://newsapps-nzh.s3-website-ap-southeast-2.amazonaws.com/local-board-views/board_chairs.json"
+      on-core-response="{{boardsLoaded}}"
+      handleAs="json">
+    </core-ajax>
+  </template>
+  <script>
+  Polymer('local-boards-service', {
+    created: function() {
+      this.boards = [];
+    },
+    boardsLoaded: function() {
+      // Make a copy of the loaded data
+      this.boards = this.$.ajax.response.chairs;
+    }
+  });
+  </script>
+</polymer-element>
