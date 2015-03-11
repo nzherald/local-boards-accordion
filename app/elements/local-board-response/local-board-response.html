@@ -9,15 +9,34 @@
     <style>
       :host {
         display: block;
+        border: 1px solid #E2E2E2;
+        border-radius: 5px;
+        padding: 14px;
+        background: white;
+        margin: 0 0 10px;
       }
-      paper-ripple {
-          color: #4285f4;
-        }
+      paper-item {
+        display: block;
+      }
+      core-icon {
+        float: right;
+        transition: transform 0.3s;
+      }
+      #name {
+        padding: 15px;
+      }
     </style>
-    <paper-item on-click="{{toggle}}">
-        <img src="{{board.image}}">
-        {{board.board}} - {{board.representative}}
-        <core-icon icon="arrow-drop-down"></core-icon>
+    <paper-item horizontal layout on-click="{{toggle}}">
+        <div>
+          <img src="{{board.image}}">
+        </div>
+        <div flex id='name'>
+          <strong>{{board.representative}}</strong><br>{{board.title}}, {{board.board}}
+        </span>
+        </div>
+        <div>
+          <core-icon id="icon" icon="arrow-drop-down"></core-icon>
+        </div>
     </paper-item>
     <core-collapse id="collapse">
       <div id='content'></div>
@@ -34,14 +53,13 @@
           }
         },
         toggle: function() {
-          this.$.collapse.toggle();
-        },
-        downAction: function(e) {
-          this.$.ripple.downAction({x: e.x, y: e.y});
-        },
-        upAction: function(e) {
-            this.$.ripple.upAction();
+          if(this.$.icon.style.transform) {
+            this.$.icon.style.transform = null
+            } else {
+            this.$.icon.style.transform = "rotate(-180deg)";
           }
+          this.$.collapse.toggle();
+        }
         });
     })();
   </script>
