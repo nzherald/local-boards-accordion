@@ -1,5 +1,4 @@
 <link rel="import" href="../../../bower_components/polymer/polymer.html">
-<link rel="import" href="../../../bower_components/core-icon-button/core-icon-button.html">
 
 <polymer-element name="local-boards-list" attributes="">
   <template>
@@ -11,7 +10,6 @@
         display: none;
       }
     </style>
-    <link rel="stylesheet" href="local-boards-list.css">
     <local-boards-service id="service" boards="{{boards}}"></local-boards-service>
       <template repeat="{{board in boards}}">
         <section>
